@@ -2,12 +2,19 @@ package by.bsuir.diplom.entity;
 
 
 import java.util.Date;
+import javax.persistence.*;
 
+@Entity
+@Table
 public class Shift {
-
+	@Id
+	@GeneratedValue
 	private int shiftId;
+    @ManyToOne
 	private Worker worker;
+	@Temporal(TemporalType.DATE)
 	private Date startTime;
+    @Temporal(TemporalType.DATE)
 	private Date endTime;
 
 

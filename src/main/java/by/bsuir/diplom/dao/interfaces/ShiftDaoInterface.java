@@ -5,7 +5,7 @@ import by.bsuir.diplom.entity.Shift;
 
 import java.util.List;
 
-public interface ShiftDaoInterface extends DaoInterface<Shift> {
+public interface ShiftDaoInterface<S extends Shift> extends DaoInterface<Shift> {
 
 	boolean save(Shift entity);
 

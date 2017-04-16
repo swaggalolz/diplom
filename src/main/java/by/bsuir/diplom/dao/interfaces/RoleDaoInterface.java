@@ -4,7 +4,7 @@ import by.bsuir.diplom.entity.Role;
 
 import java.util.List;
 
-public interface RoleDaoInterface extends DaoInterface<Role> {
+public interface RoleDaoInterface<R extends Role> extends DaoInterface<Role> {
 
     boolean save(Role entity);
 

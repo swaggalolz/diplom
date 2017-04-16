@@ -1,11 +1,16 @@
 package by.bsuir.diplom.entity;
 
+import javax.persistence.*;
 
+@Entity
+@Table
 public class Box {
-
+	@Id
+	@GeneratedValue
 	private int boxId;
 	private String startSerialNumber;
 	private String endSerialNumber;
+	@OneToMany(mappedBy = "workerId")
 	private Worker worker;
 
 

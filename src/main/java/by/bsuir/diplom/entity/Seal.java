@@ -2,13 +2,19 @@ package by.bsuir.diplom.entity;
 
 
 import java.util.Date;
+import javax.persistence.*;
 
+@Entity
+@Table
 public class Seal {
-
+	@Id
+	@GeneratedValue
 	private int sealId;
 	private String serialNumber;
+	@Temporal(TemporalType.DATE)
 	private Date creationDate;
-	private Worker worker;
+    @OneToMany(mappedBy = "workerId")
+    private Worker worker;
 
 
 	public int getSealId(){

@@ -1,13 +1,19 @@
 package by.bsuir.diplom.entity;
 
 
+import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.*;
 
+@Entity
+@Table
 public class Role {
-
+	@Id
+	@GeneratedValue
 	private int roleId;
 	private String roleName;
-	private List<Worker> workers;
+	@OneToMany(mappedBy = "workerId")
+	private List<Worker> workers = new ArrayList<Worker>();
 
 
 	public String getRoleName(){

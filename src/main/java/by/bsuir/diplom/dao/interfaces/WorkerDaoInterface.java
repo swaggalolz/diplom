@@ -6,7 +6,7 @@ import by.bsuir.diplom.entity.Worker;
 
 import java.util.List;
 
-public interface WorkerDaoInterface extends DaoInterface<Worker> {
+public interface WorkerDaoInterface<W extends Worker> extends DaoInterface<Worker> {
 
 	boolean save(Worker entity);
 

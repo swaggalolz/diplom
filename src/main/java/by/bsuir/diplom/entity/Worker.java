@@ -3,14 +3,20 @@ package by.bsuir.diplom.entity;
 
 import java.util.Date;
 import java.util.List;
+import javax.persistence.*;
 
+@Entity
+@Table
 public class Worker {
-
+	@Id
+	@GeneratedValue
 	private int workerId;
 	private String name;
 	private String surname;
+	@Temporal(TemporalType.DATE)
 	private Date birthday;
 	private float performance;
+	@ManyToMany(mappedBy="roleId",cascade=CascadeType.PERSIST)
 	private List<Role> roles;
 
 
