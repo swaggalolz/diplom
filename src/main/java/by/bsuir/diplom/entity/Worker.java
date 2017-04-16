@@ -16,9 +16,16 @@ public class Worker {
 	@Temporal(TemporalType.DATE)
 	private Date birthday;
 	private float performance;
-	@ManyToMany(mappedBy="roleId",cascade=CascadeType.PERSIST)
+	@ManyToMany
 	private List<Role> roles;
 
+	public Worker(String name, String surname, Date birthday, float performance, List<Role> roles) {
+		this.name = name;
+		this.surname = surname;
+		this.birthday = birthday;
+		this.performance = performance;
+		this.roles = roles;
+	}
 
 	public int getWorkerId(){
 		return workerId;

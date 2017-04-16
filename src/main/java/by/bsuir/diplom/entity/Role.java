@@ -1,9 +1,10 @@
 package by.bsuir.diplom.entity;
 
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table
@@ -12,11 +13,12 @@ public class Role {
 	@GeneratedValue
 	private int roleId;
 	private String roleName;
-	@OneToMany(mappedBy = "workerId")
-	private List<Worker> workers = new ArrayList<Worker>();
 
+    public Role(String roleName) {
+        this.roleName = roleName;
+    }
 
-	public String getRoleName(){
+    public String getRoleName(){
 		return roleName;
 	}
 
@@ -30,14 +32,6 @@ public class Role {
 
 	public void setRoleId(int newVal){
 		roleId = newVal;
-	}
-
-	public List<Worker> getWorkers(){
-		return workers;
-	}
-
-	public void setWorkers(List<Worker> newVal){
-		workers = newVal;
 	}
 
 }

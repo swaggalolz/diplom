@@ -1,8 +1,8 @@
 package by.bsuir.diplom.entity;
 
 
-import java.util.Date;
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table
@@ -17,8 +17,13 @@ public class Shift {
     @Temporal(TemporalType.DATE)
 	private Date endTime;
 
+    public Shift(Worker worker, Date startTime, Date endTime) {
+        this.worker = worker;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
 
-	public int getShiftId(){
+    public int getShiftId(){
 		return shiftId;
 	}
 

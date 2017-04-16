@@ -13,11 +13,16 @@ public class Seal {
 	private String serialNumber;
 	@Temporal(TemporalType.DATE)
 	private Date creationDate;
-    @OneToMany(mappedBy = "workerId")
+    @ManyToOne
     private Worker worker;
 
+    public Seal(String serialNumber, Date creationDate, Worker worker) {
+        this.serialNumber = serialNumber;
+        this.creationDate = creationDate;
+        this.worker = worker;
+    }
 
-	public int getSealId(){
+    public int getSealId(){
 		return sealId;
 	}
 

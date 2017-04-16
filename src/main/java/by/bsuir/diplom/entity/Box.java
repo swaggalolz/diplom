@@ -10,10 +10,15 @@ public class Box {
 	private int boxId;
 	private String startSerialNumber;
 	private String endSerialNumber;
-	@OneToMany(mappedBy = "workerId")
+	@ManyToOne
 	private Worker worker;
 
 
+	public Box(String startSerialNumber, String endSerialNumber, Worker worker) {
+		this.startSerialNumber = startSerialNumber;
+		this.endSerialNumber = endSerialNumber;
+		this.worker = worker;
+	}
 
 	public int getBoxId(){
 		return boxId;
