@@ -6,11 +6,11 @@ import java.util.List;
 
 public interface BoxDaoInterface<B extends Box> extends DaoInterface<Box> {
 
-    boolean save(Box entity);
+    Box save(Box entity);
 
-    boolean delete(int id);
+    void delete(Box entity);
 
-    Box update(Box entity);
+    void update(Box entity);
 
     Box getById(int id);
 

@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface ShiftDaoInterface<S extends Shift> extends DaoInterface<Shift> {
 
-	boolean save(Shift entity);
+	Shift save(Shift entity);
 
-	boolean delete(int id);
+	void delete(Shift entity);
 
-	Shift update(Shift entity);
+	void update(Shift entity);
 
 	Shift getById(int id);
 

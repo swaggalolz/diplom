@@ -2,11 +2,12 @@ package by.bsuir.diplom.entity;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table
-public class Shift {
+public class Shift implements Serializable {
 	@Id
 	@GeneratedValue
 	private int shiftId;

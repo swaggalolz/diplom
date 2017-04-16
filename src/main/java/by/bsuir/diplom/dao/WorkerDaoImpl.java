@@ -3,29 +3,42 @@ package by.bsuir.diplom.dao;
 
 import by.bsuir.diplom.dao.interfaces.WorkerDaoInterface;
 import by.bsuir.diplom.entity.Worker;
+import org.hibernate.Session;
 
 import java.util.List;
 
 public class WorkerDaoImpl implements WorkerDaoInterface<Worker> {
 
 
-	public boolean save(Worker entity) {
-		return false;
+	public Worker save(Worker entity) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		Worker worker = (Worker) session.save(entity);
+		session.getTransaction().commit();
+		return worker;
 	}
 
-	public boolean delete(int id) {
-		return false;
+	public void delete(Worker entity) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		session.delete(entity);
+		session.getTransaction().commit();
 	}
 
-	public Worker update(Worker entity) {
-		return null;
+	public void update(Worker entity) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		session.update(entity);
+		session.getTransaction().commit();
 	}
 
 	public Worker getById(int id) {
-		return null;
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		return session.get(Worker.class, id);
 	}
 
 	public List<Worker> getAll() {
-		return null;
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		return session.createCriteria(Worker.class).list();
 	}
 }

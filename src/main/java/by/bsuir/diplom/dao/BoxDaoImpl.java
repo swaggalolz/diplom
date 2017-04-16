@@ -3,28 +3,41 @@ package by.bsuir.diplom.dao;
 
 import by.bsuir.diplom.dao.interfaces.BoxDaoInterface;
 import by.bsuir.diplom.entity.Box;
+import org.hibernate.Session;
 
 import java.util.List;
 
 public class BoxDaoImpl implements BoxDaoInterface<Box> {
 
-	public boolean save(Box entity) {
-		return false;
+	public Box save(Box entity) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		Box box = (Box) session.save(entity);
+		session.getTransaction().commit();
+		return box;
 	}
 
-	public boolean delete(int id) {
-		return false;
+	public void delete(Box entity) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		session.delete(entity);
+		session.getTransaction().commit();
 	}
 
-	public Box update(Box entity) {
-		return null;
+	public void update(Box entity) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		session.update(entity);
+		session.getTransaction().commit();
 	}
 
 	public Box getById(int id) {
-		return null;
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		return session.get(Box.class, id);
 	}
 
 	public List<Box> getAll() {
-		return null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        return session.createCriteria(Box.class).list();
 	}
 }

@@ -1,13 +1,14 @@
 package by.bsuir.diplom.entity;
 
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
 
 @Entity
 @Table
-public class Worker {
+public class Worker implements Serializable {
 	@Id
 	@GeneratedValue
 	private int workerId;

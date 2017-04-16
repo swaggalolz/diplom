@@ -1,10 +1,11 @@
 package by.bsuir.diplom.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table
-public class Box {
+public class Box implements Serializable {
 	@Id
 	@GeneratedValue
 	private int boxId;

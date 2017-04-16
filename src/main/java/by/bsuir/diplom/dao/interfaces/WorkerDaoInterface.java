@@ -8,11 +8,11 @@ import java.util.List;
 
 public interface WorkerDaoInterface<W extends Worker> extends DaoInterface<Worker> {
 
-	boolean save(Worker entity);
+	Worker save(Worker entity);
 
-	boolean delete(int id);
+	void delete(Worker entity);
 
-	Worker update(Worker entity);
+	void update(Worker entity);
 
 	Worker getById(int id);
 

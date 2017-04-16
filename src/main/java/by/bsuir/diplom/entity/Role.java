@@ -5,10 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity
 @Table
-public class Role {
+public class Role implements Serializable {
 	@Id
 	@GeneratedValue
 	private int roleId;

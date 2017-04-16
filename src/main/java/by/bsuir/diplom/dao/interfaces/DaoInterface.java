@@ -5,11 +5,11 @@ import java.util.List;
 
 interface DaoInterface<E> {
 
-	boolean save(E entity);
+	E save(E entity);
 
-	boolean delete(int id);
+	void delete(E entity);
 
-	E update(E entity);
+	void update(E entity);
 
 	E getById(int id);
 

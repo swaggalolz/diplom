@@ -6,11 +6,11 @@ import java.util.List;
 
 public interface SealDaoInterface<S extends Seal> extends DaoInterface<Seal> {
 
-	boolean save(Seal entity);
+	Seal save(Seal entity);
 
-	boolean delete(int id);
+	void delete(Seal entity);
 
-	Seal update(Seal entity);
+	void update(Seal entity);
 
 	Seal getById(int id);
 

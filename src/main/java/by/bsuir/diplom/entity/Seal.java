@@ -1,12 +1,13 @@
 package by.bsuir.diplom.entity;
 
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
 @Entity
 @Table
-public class Seal {
+public class Seal implements Serializable {
 	@Id
 	@GeneratedValue
 	private int sealId;
