@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class Main {
 
-    public static void main(String args[]) throws InterruptedException {
+    public static void main(String args[]) throws Exception {
         MainForm application = new MainForm();
         application.setSize(new Dimension(1024, 768));
         application.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -15,6 +15,5 @@ public class Main {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         application.setLocation(dim.width / 2 - application.getSize().width / 2, dim.height / 2 - application.getSize().height / 2);
     }
-
 
 }

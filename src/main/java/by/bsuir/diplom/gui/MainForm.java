@@ -1,9 +1,11 @@
 package by.bsuir.diplom.gui;
 
 
+import by.bsuir.diplom.logic.QualityController;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.videoio.VideoCapture;
+//import org.opencv.highgui.VideoCapture;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -37,7 +39,9 @@ public class MainForm extends JFrame {
     private ScannerThread cameraScanner;
     final JFileChooser fc = new JFileChooser();
 
-    public MainForm() {
+    private final QualityController qualityController = new QualityController();
+
+    public MainForm() throws Exception {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 
         Dimension minimumSize = new Dimension(250, 50);
@@ -92,7 +96,11 @@ public class MainForm extends JFrame {
 
         controlBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                control();
+                try {
+                    control();
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
             }
         });
         controlTab.add(controlBtn, BorderLayout.PAGE_END);
@@ -118,11 +126,14 @@ public class MainForm extends JFrame {
         this.add(splitPane);
     }
 
-    private void control() {
+
+
+    private void control() throws Exception {
         Icon i = label.getIcon();
         if (i instanceof ImageIcon) {
             ImageIcon icon = (ImageIcon) i;
-            saveImage((BufferedImage) icon.getImage());
+//            saveImage((BufferedImage) icon.getImage());
+            qualityController.control((BufferedImage) icon.getImage());
         }
     }
 
@@ -155,7 +166,7 @@ public class MainForm extends JFrame {
 
 
     //Show image on window
-    public void window(BufferedImage img, String text, int x, int y) {
+    public void window(BufferedImage img, String text, int x, int y) throws Exception {
 //        rightPane.set
         JFrame frame0 = new JFrame();
         frame0.getContentPane().add(new MainForm());
@@ -234,7 +245,7 @@ public class MainForm extends JFrame {
                     label.setIcon(new ImageIcon(image));
                 }
                 try {
-                    sleep(500);
+                    sleep(10);
                 } catch (InterruptedException e) {
                     System.out.println("Sleep was interrupted.");
                 }
