@@ -2,7 +2,6 @@ package by.bsuir.diplom.buisness;
 
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -15,6 +14,7 @@ import by.bsuir.diplom.filters.BinaryFilter;
 import by.bsuir.diplom.filters.Filter;
 import by.bsuir.diplom.filters.MedianFilter;
 import by.bsuir.diplom.logic.ContentAnalyzer;
+import by.bsuir.diplom.logic.NumberDetector;
 import by.bsuir.diplom.utils.ImageHelper;
 
 public class QualityController {
@@ -34,13 +34,30 @@ public class QualityController {
         int[] filteredPixels = applyFilters(image, filters);
 
         List<ContentLine> lines = filterContentLines(ContentAnalyzer.getContentLines(width, height, filteredPixels));
-
-        Debugger.debugContentLines(image, lines, "E:/dip/res/");
-
-
         ImageHelper.saveImage(ImageHelper.getImageFromPixels(filteredPixels, width, height, BufferedImage.TYPE_INT_RGB), "E:/dip/res.jpg");
 
+        Debugger.debugContentLines(ImageHelper.getImageFromPixels(filteredPixels, width, height, BufferedImage.TYPE_INT_RGB), lines, "E:/dip/res/");
+
+        List<String> serialNumbers = indicateSerialNumbers(ImageHelper.getImageFromPixels(filteredPixels, width, height, BufferedImage.TYPE_INT_RGB), lines);
+
+
         return false;
+    }
+
+    private List<String> indicateSerialNumbers(BufferedImage image, List<ContentLine> lines) {
+        List<String> resultNumbers = new ArrayList<>();
+
+        for (ContentLine contentLine : lines) {
+            String number = "";
+
+            for (Content content : contentLine.getLine()) {
+                number += NumberDetector.detectNumber(ImageHelper.getSubImage(image, content.x, content.y, content.width, content.height));
+            }
+            System.out.println(number);
+            resultNumbers.add(number);
+        }
+
+        return resultNumbers;
     }
 
     private List<ContentLine> filterContentLines(List<ContentLine> lines) {
@@ -61,8 +78,8 @@ public class QualityController {
         int[] pixels = ImageHelper.getPixels(image);
         for (Filter filter : filters) {
             pixels = filter.transform(width, height, pixels);
-            ImageHelper.saveImage(ImageHelper.getImageFromPixels(pixels, width, height, BufferedImage.TYPE_INT_RGB), "E:/dip/res.jpg");
         }
+
         return pixels;
     }
 

@@ -2,10 +2,10 @@ package by.bsuir.diplom.gui;
 
 
 import by.bsuir.diplom.buisness.QualityController;
+import by.bsuir.diplom.utils.ImageHelper;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.videoio.VideoCapture;
-//import org.opencv.highgui.VideoCapture;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -241,7 +241,7 @@ public class MainForm extends JFrame {
                 final Mat frame = new Mat();
                 camera.read(frame);
                 if (camera.read(frame)) {
-                    BufferedImage image = matToBufferedImage(frame);
+                    BufferedImage image = ImageHelper.matToBufferedImage(frame);
                     label.setIcon(new ImageIcon(image));
                 }
                 try {
@@ -256,23 +256,6 @@ public class MainForm extends JFrame {
         public void interrupt() {
             camera.release();
             super.interrupt();
-        }
-
-        public BufferedImage matToBufferedImage(Mat frame) {
-            //Mat() to BufferedImage
-            int type = 0;
-            if (frame.channels() == 1) {
-                type = BufferedImage.TYPE_BYTE_GRAY;
-            } else if (frame.channels() == 3) {
-                type = BufferedImage.TYPE_3BYTE_BGR;
-            }
-            BufferedImage image = new BufferedImage(frame.width(), frame.height(), type);
-            WritableRaster raster = image.getRaster();
-            DataBufferByte dataBuffer = (DataBufferByte) raster.getDataBuffer();
-            byte[] data = dataBuffer.getData();
-            frame.get(0, 0, data);
-
-            return image;
         }
     }
 }

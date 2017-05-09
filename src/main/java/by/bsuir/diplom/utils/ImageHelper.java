@@ -1,11 +1,15 @@
 package by.bsuir.diplom.utils;
 
 import org.apache.commons.io.FilenameUtils;
+import org.opencv.core.CvType;
+import org.opencv.core.Mat;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
 import java.awt.image.RasterFormatException;
+import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
 
@@ -125,4 +129,37 @@ public class ImageHelper {
         return image;
     }
 
+    // Convert image to Mat
+    public static Mat bufferedImageToMat(BufferedImage im) {
+        // Convert INT to BYTE
+        //im = new BufferedImage(im.getWidth(), im.getHeight(),BufferedImage.TYPE_3BYTE_BGR);
+        // Convert bufferedimage to byte array
+        byte[] pixels = ((DataBufferByte) im.getRaster().getDataBuffer())
+                .getData();
+
+        // Create a Matrix the same size of image
+        Mat image = new Mat(im.getHeight(), im.getWidth(), CvType.CV_8UC3);
+        // Fill Matrix with image values
+        image.put(0, 0, pixels);
+
+        return image;
+
+    }
+
+    public static BufferedImage matToBufferedImage(Mat frame) {
+        //Mat() to BufferedImage
+        int type = 0;
+        if (frame.channels() == 1) {
+            type = BufferedImage.TYPE_BYTE_GRAY;
+        } else if (frame.channels() == 3) {
+            type = BufferedImage.TYPE_3BYTE_BGR;
+        }
+        BufferedImage image = new BufferedImage(frame.width(), frame.height(), type);
+        WritableRaster raster = image.getRaster();
+        DataBufferByte dataBuffer = (DataBufferByte) raster.getDataBuffer();
+        byte[] data = dataBuffer.getData();
+        frame.get(0, 0, data);
+
+        return image;
+    }
 }
