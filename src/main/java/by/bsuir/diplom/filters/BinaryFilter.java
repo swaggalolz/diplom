@@ -9,8 +9,8 @@ public class BinaryFilter implements Filter {
     public int[] transform(int width, int height, final int[] pixels) {
         int[] grayScale = toGray(width, height, pixels);
 
-//        int threshold = otsuTreshold(width, height, grayScale);
-        int threshold = 120;
+        int threshold = otsuTreshold(width, height, grayScale);
+
         int[] binarized = new int[width * height];
 
         for (int i = 0; i < width * height; i++) {

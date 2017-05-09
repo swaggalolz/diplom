@@ -1,7 +1,7 @@
 package by.bsuir.diplom.gui;
 
 
-import by.bsuir.diplom.logic.QualityController;
+import by.bsuir.diplom.buisness.QualityController;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.videoio.VideoCapture;
