@@ -1,6 +1,10 @@
 package by.bsuir.diplom.entity;
 
+import org.hibernate.annotations.*;
+
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.io.Serializable;
 
 @Entity
@@ -12,10 +16,13 @@ public class Box implements Serializable {
 	private String startSerialNumber;
 	private String endSerialNumber;
 	@ManyToOne
+	@Cascade({org.hibernate.annotations.CascadeType.ALL})
 	private Worker worker;
 
+    public Box() {
+    }
 
-	public Box(String startSerialNumber, String endSerialNumber, Worker worker) {
+    public Box(String startSerialNumber, String endSerialNumber, Worker worker) {
 		this.startSerialNumber = startSerialNumber;
 		this.endSerialNumber = endSerialNumber;
 		this.worker = worker;

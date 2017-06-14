@@ -1,6 +1,9 @@
 package by.bsuir.diplom.entity;
 
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
@@ -15,7 +18,11 @@ public class Seal implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date creationDate;
     @ManyToOne
+    @Cascade({CascadeType.ALL})
     private Worker worker;
+
+    public Seal() {
+    }
 
     public Seal(String serialNumber, Date creationDate, Worker worker) {
         this.serialNumber = serialNumber;

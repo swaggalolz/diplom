@@ -1,10 +1,14 @@
 package by.bsuir.diplom.entity;
 
 
+import org.hibernate.annotations.*;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table
@@ -14,21 +18,27 @@ public class Worker implements Serializable {
 	private int workerId;
 	private String name;
 	private String surname;
+    private String password;
 	@Temporal(TemporalType.DATE)
 	private Date birthday;
 	private float performance;
 	@ManyToMany
+	@Cascade({org.hibernate.annotations.CascadeType.ALL})
 	private List<Role> roles;
 
-	public Worker(String name, String surname, Date birthday, float performance, List<Role> roles) {
-		this.name = name;
-		this.surname = surname;
-		this.birthday = birthday;
-		this.performance = performance;
-		this.roles = roles;
-	}
+    public Worker() {
+    }
 
-	public int getWorkerId(){
+    public Worker(String name, String surname, String password, Date birthday, float performance, List<Role> roles) {
+        this.name = name;
+        this.surname = surname;
+        this.password = password;
+        this.birthday = birthday;
+        this.performance = performance;
+        this.roles = roles;
+    }
+
+    public int getWorkerId(){
 		return workerId;
 	}
 
@@ -76,4 +86,11 @@ public class Worker implements Serializable {
 		roles = newVal;
 	}
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

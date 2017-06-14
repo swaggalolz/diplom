@@ -14,20 +14,26 @@ import by.bsuir.diplom.filters.BinaryFilter;
 import by.bsuir.diplom.filters.Filter;
 import by.bsuir.diplom.filters.MedianFilter;
 import by.bsuir.diplom.logic.ContentAnalyzer;
-import by.bsuir.diplom.logic.NumberDetector;
+import by.bsuir.diplom.logic.NumberRecognition;
+import by.bsuir.diplom.perceptron.Perceptron;
 import by.bsuir.diplom.utils.ImageHelper;
 
 public class QualityController {
 
-
+    static NumberRecognition numberRecognition;
     final static List<Filter> filters = new LinkedList<Filter>();
 
     static {
         filters.add(new MedianFilter());
         filters.add(new BinaryFilter());
+        try {
+            numberRecognition = new NumberRecognition();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public boolean control(BufferedImage image) throws Exception {
+    public List<String> recognizeSerialNumbers(BufferedImage image) throws Exception {
 
         final int width = image.getWidth();
         final int height = image.getHeight();
@@ -38,20 +44,17 @@ public class QualityController {
 
         Debugger.debugContentLines(ImageHelper.getImageFromPixels(filteredPixels, width, height, BufferedImage.TYPE_INT_RGB), lines, "E:/dip/res/");
 
-        List<String> serialNumbers = indicateSerialNumbers(ImageHelper.getImageFromPixels(filteredPixels, width, height, BufferedImage.TYPE_INT_RGB), lines);
-
-
-        return false;
+        return indicateSerialNumbers(ImageHelper.getImageFromPixels(filteredPixels, width, height, BufferedImage.TYPE_INT_RGB), lines);
     }
 
-    private List<String> indicateSerialNumbers(BufferedImage image, List<ContentLine> lines) {
+    private List<String> indicateSerialNumbers(BufferedImage image, List<ContentLine> lines) throws IOException {
         List<String> resultNumbers = new ArrayList<>();
 
         for (ContentLine contentLine : lines) {
             String number = "";
 
             for (Content content : contentLine.getLine()) {
-                number += NumberDetector.detectNumber(ImageHelper.getSubImage(image, content.x, content.y, content.width, content.height));
+                number += numberRecognition.recognize(ImageHelper.getSubImage(image, content.x, content.y, content.width, content.height));
             }
             System.out.println(number);
             resultNumbers.add(number);
@@ -86,7 +89,7 @@ public class QualityController {
 
     public static void main(String[] args) throws Exception {
         QualityController controller = new QualityController();
-        controller.control(ImageHelper.readImage("E:/dip/ORIG/G1.jpg"));
+        controller.recognizeSerialNumbers(ImageHelper.readImage("E:/dip/ORIG/G1.jpg"));
     }
 
 }

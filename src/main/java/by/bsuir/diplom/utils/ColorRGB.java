@@ -38,7 +38,7 @@ public class ColorRGB {
         return red << 16 | green << 8 | blue;
     }
 
-    public static int getGray(int pixel){
+    public static int getGray(int pixel) {
         int red = (pixel & 0xff0000) >> 16;
         int green = (pixel & 0xff00) >> 8;
         int blue = pixel & 0xff;

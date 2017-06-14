@@ -15,7 +15,10 @@ public class Role implements Serializable {
 	private int roleId;
 	private String roleName;
 
-    public Role(String roleName) {
+	public Role() {
+	}
+
+	public Role(String roleName) {
         this.roleName = roleName;
     }
 
@@ -34,5 +37,6 @@ public class Role implements Serializable {
 	public void setRoleId(int newVal){
 		roleId = newVal;
 	}
+
 
 }

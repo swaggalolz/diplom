@@ -13,9 +13,11 @@ public class WorkerDaoImpl implements WorkerDaoInterface<Worker> {
 	public Worker save(Worker entity) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		session.beginTransaction();
-		Worker worker = (Worker) session.save(entity);
+        Integer id = (Integer) session.save(entity);
 		session.getTransaction().commit();
-		return worker;
+        session.close();
+        entity.setWorkerId(id);
+		return entity;
 	}
 
 	public void delete(Worker entity) {
@@ -39,6 +41,8 @@ public class WorkerDaoImpl implements WorkerDaoInterface<Worker> {
 
 	public List<Worker> getAll() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		return session.createCriteria(Worker.class).list();
+		List<Worker> res = session.createCriteria(Worker.class).list();
+		session.close();
+		return res;
 	}
 }

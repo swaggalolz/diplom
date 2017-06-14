@@ -19,7 +19,7 @@ public class Debugger {
             lineFolder.mkdir();
             for (Content content : lines.get(j).getLine()) {
                 BufferedImage result = ImageHelper.getSubImage(image, content.x, content.y, content.width, content.height);
-                ImageHelper.saveImage(result, lineFolder.getPath() + "/" + j + ".bmp");
+                ImageHelper.saveImage(result, lineFolder.getPath() + "/" + j + ".png");
             }
         }
         System.out.println("TOTAL LINES: " + lines.size());

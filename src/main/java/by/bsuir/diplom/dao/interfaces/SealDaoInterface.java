@@ -14,6 +14,8 @@ public interface SealDaoInterface<S extends Seal> extends DaoInterface<Seal> {
 
 	Seal getById(int id);
 
+	List<Seal> getBySerialNumber(String serialNumber);
+
 	List<Seal> getAll();
 
 }

@@ -23,7 +23,7 @@ public class TestDao {
         List<Role> roles = new ArrayList<Role>();
         roles.add(role);
 
-        Worker worker = new Worker("Ivan", "Simth", new Date(1990,12,2), 500.5f, roles);
+        Worker worker = new Worker("Ivan", "Simth", "123456", new Date(1990,12,2), 500.5f, roles);
 
         session.save(worker);
         session.getTransaction().commit();
